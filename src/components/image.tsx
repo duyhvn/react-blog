@@ -1,6 +1,12 @@
 import React from "react";
 
-export const Image = ({ title, largeImage, smallImage }) => {
+type ImageProps = {
+  title: string;
+  largeImage: string;
+  smallImage: string;
+};
+
+export const Image: React.FC<ImageProps> = ({ title, largeImage, smallImage }) => {
   return (
     <div className="portfolio-item">
       <div className="hover-bg">

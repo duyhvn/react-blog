@@ -1,26 +1,43 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import emailjs from "emailjs-com";
-import React from "react";
 
-const initialState = {
-  name: "",
-  email: "",
-  message: "",
-};
-export const Contact = (props) => {
-  const [{ name, email, message }, setState] = useState(initialState);
+interface ContactProps {
+  data: {
+    address: string;
+    phone: string;
+    email: string;
+    facebook: string;
+    twitter: string;
+    youtube: string;
+  };
+}
 
-  const handleChange = (e) => {
+interface State {
+  name: string;
+  email: string;
+  message: string;
+}
+
+export const Contact: React.FC<ContactProps> = (props) => {
+  const initialState: State = {
+    name: "",
+    email: "",
+    message: "",
+  };
+  const [{ name, email, message }, setState] = useState<State>(initialState);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setState((prevState) => ({ ...prevState, [name]: value }));
   };
+
   const clearState = () => setState({ ...initialState });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(name, email, message);
     emailjs
-      .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target, "YOUR_USER_ID")
+      .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target as HTMLFormElement, "YOUR_USER_ID")
       .then(
         (result) => {
           console.log(result.text);
@@ -31,6 +48,7 @@ export const Contact = (props) => {
         }
       );
   };
+
   return (
     <div>
       <div id="contact">
@@ -44,7 +62,7 @@ export const Contact = (props) => {
                   get back to you as soon as possible.
                 </p>
               </div>
-              <form name="sentMessage" validate onSubmit={handleSubmit}>
+              <form name="sentMessage" onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col-md-6">
                     <div className="form-group">
@@ -80,7 +98,7 @@ export const Contact = (props) => {
                     name="message"
                     id="message"
                     className="form-control"
-                    rows="4"
+                    rows={4}
                     placeholder="Message"
                     required
                     onChange={handleChange}
