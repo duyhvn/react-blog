@@ -8,9 +8,9 @@ import { Services } from "./components/services";
 import { Gallery } from "./components/gallery";
 import { Testimonials } from "./components/testimonials";
 import { Contact } from "./components/contact";
-import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
 import "./App.css";
+import { useGetAppConfig } from "./services/api-hooks";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
     speed: 1000,
@@ -19,46 +19,53 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
 
 
 interface props {
-    Header: { paragraph: string | undefined; title: string | undefined };
+    Header: { paragraph: '', title: '' };
     Features: any[];
-    About: { Why: any[]; Why2: any[]; paragraph: string | undefined };
+    About: { Why: any[]; Why2: any[]; paragraph: '' };
     Services: any[];
     Gallery: any[];
     Testimonials: any[];
     Team: any[];
     Contact: {
+        address: '',
+        phone: '',
+        email: '',
+        facebook: '',
+        twitter: '',
+        youtube: '',
+
+    };
+}
+
+const App: React.FC = () => {
+
+    const [post, fetchState, getAppConfig] = useGetAppConfig();
+
+    let [landingPageData, setLandingPageData] = useState<props>({
+        Header: { paragraph: '', title: '' },
+        Features: [],
+        About: { Why: [], Why2: [], paragraph: '' },
+        Services: [],
+        Gallery: [],
+        Testimonials: [],
+        Team: [],
+        Contact: {
             address: '',
             phone: '',
             email: '',
             facebook: '',
             twitter: '',
             youtube: '',
-        
-    };
-}
-
-const App: React.FC = () => {
-    const [landingPageData, setLandingPageData] = useState<props>({
-        Header: { paragraph: undefined, title: undefined },
-        Features: [],
-        About: { Why: [], Why2: [], paragraph: undefined },
-        Services: [],
-        Gallery: [],
-        Testimonials: [],
-        Team: [],
-        Contact:  {
-                address: '',
-                phone: '',
-                email: '',
-                facebook: '',
-                twitter: '',
-                youtube: '',
-            }
-        },
+        }
+    },
     );
     useEffect(() => {
-        setLandingPageData(JsonData as props);
+        getAppConfig(1).then()
     }, []);
+
+    if (post) {
+        landingPageData = JSON.parse(post.secretKey);
+    }
 
     return (
         <div>
