@@ -7,7 +7,7 @@ interface HeaderProps {
     };
 }
 
-export class Header extends React.Component<HeaderProps> {
+export class Header extends React.Component<HeaderProps, any> {
     render(): React.ReactNode {
         const { data } = this.props;
         return (
