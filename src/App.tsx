@@ -11,6 +11,7 @@ import { Contact } from "./components/contact";
 import SmoothScroll from "smooth-scroll";
 import "./App.css";
 import { useGetAppConfig } from "./services/api-hooks";
+import { Footer } from "./components/footer";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
     speed: 1000,
@@ -35,6 +36,11 @@ interface props {
         youtube: '',
 
     };
+    Footer: {
+        copyright: '',
+        website: '',
+        orgName: ''
+    };
 }
 
 const App: React.FC = () => {
@@ -42,22 +48,22 @@ const App: React.FC = () => {
     const [post, fetchState, getAppConfig] = useGetAppConfig();
 
     let [landingPageData, setLandingPageData] = useState<props>({
-        Header: { paragraph: '', title: '' },
-        Features: [],
-        About: { Why: [], Why2: [], paragraph: '' },
-        Services: [],
-        Gallery: [],
-        Testimonials: [],
-        Team: [],
-        Contact: {
-            address: '',
-            phone: '',
-            email: '',
-            facebook: '',
-            twitter: '',
-            youtube: '',
-        }
-    },
+            Header: {paragraph: '', title: ''},
+            Features: [],
+            About: {Why: [], Why2: [], paragraph: ''},
+            Services: [],
+            Gallery: [],
+            Testimonials: [],
+            Team: [],
+            Contact: {
+
+            },
+            Footer: {
+                copyright: '',
+                website: '',
+                orgName: ''
+            }
+        },
     );
     useEffect(() => {
         getAppConfig(1).then()
@@ -69,15 +75,16 @@ const App: React.FC = () => {
 
     return (
         <div>
-            <Navigation />
-            <Header data={landingPageData.Header} />
-            <Features data={landingPageData.Features} />
-            <About data={landingPageData.About} />
-            <Services data={landingPageData.Services} />
-            <Gallery data={landingPageData.Gallery} />
-            <Testimonials data={landingPageData.Testimonials} />
-            <Team data={landingPageData.Team} />
-            <Contact data={landingPageData.Contact} />
+            <Navigation/>
+            <Header data={landingPageData.Header}/>
+            <Features data={landingPageData.Features}/>
+            <About data={landingPageData.About}/>
+            <Services data={landingPageData.Services}/>
+            <Gallery data={landingPageData.Gallery}/>
+            <Testimonials data={landingPageData.Testimonials}/>
+            <Team data={landingPageData.Team}/>
+            <Contact data={landingPageData.Contact}/>
+            <Footer data={landingPageData.Footer}/>
         </div>
     );
 };
