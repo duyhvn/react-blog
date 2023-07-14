@@ -1,7 +1,13 @@
 import React from "react";
 
 type TestimonialProps = {
-    data: { name: string; img: string; text: string }[];
+
+    data: {
+        info: {
+            sectionTitle:string
+        },
+        list: { name: string; img: string; text: string }[]
+    };
 };
 
 export const Testimonials: React.FC<TestimonialProps> = ({ data }) => {
@@ -9,11 +15,10 @@ export const Testimonials: React.FC<TestimonialProps> = ({ data }) => {
         <div id="testimonials">
             <div className="container">
                 <div className="section-title text-center">
-                    <h2>What our clients say</h2>
+                    <h2>{data.info.sectionTitle}</h2>
                 </div>
                 <div className="row">
-                    {data
-                        ? data.map((d, i) => (
+                    {data? data.list.map((d, i) => (
                             <div key={`${d.name}-${i}`} className="col-md-4">
                                 <div className="testimonial">
                                     <div className="testimonial-image">

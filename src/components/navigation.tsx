@@ -13,9 +13,9 @@ export const Navigation: React.FC = () => {
           >
             {" "}
             <span className="sr-only">Toggle navigation</span>{" "}
-            <span className="icon-bar"></span>{" "}
-            <span className="icon-bar"></span>{" "}
-            <span className="icon-bar"></span>{" "}
+            <span className="icon-bar"/>{" "}
+            <span className="icon-bar"/>{" "}
+            <span className="icon-bar"/>{" "}
           </button>
           <a className="navbar-brand page-scroll" href="#page-top">
             React Landing Page

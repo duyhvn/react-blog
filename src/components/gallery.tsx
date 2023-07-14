@@ -2,7 +2,13 @@ import { Image } from "./image";
 import React from "react";
 
 interface GalleryProps {
-  data: any[];
+  data: {
+    info: {
+      sectionTitle:string;
+      sectionTitleDesc:string;
+    },
+    list: any[]
+  };
 }
 
 export const Gallery: React.FC<GalleryProps> = ({ data }) => {
@@ -10,16 +16,11 @@ export const Gallery: React.FC<GalleryProps> = ({ data }) => {
     <div id="portfolio" className="text-center">
       <div className="container">
         <div className="section-title">
-          <h2>Gallery</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit duis sed
-            dapibus leonec.
-          </p>
+          <h2>{data? data.info.sectionTitle : "loading"}</h2>
         </div>
         <div className="row">
           <div className="portfolio-items">
-            {data
-              ? data.map((d: any, i: number) => (
+            {data? data.list.map((d: any, i: number) => (
                 <div
                   key={`${d.title}-${i}`}
                   className="col-sm-6 col-md-4 col-lg-4"

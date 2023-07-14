@@ -3,7 +3,7 @@ import { Navigation } from "./components/navigation";
 import { Header } from "./components/header";
 import { Features } from "./components/features";
 import { About } from "./components/about";
-import { Team } from "./components/our_team";
+import { Team } from "./components/team";
 import { Services } from "./components/services";
 import { Gallery } from "./components/gallery";
 import { Testimonials } from "./components/testimonials";
@@ -20,22 +20,29 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
 
 
 interface props {
-    Header: { paragraph: '', title: '' };
-    Features: any[];
-    About: { Why: any[]; Why2: any[]; paragraph: '' };
-    Services: any[];
-    Gallery: any[];
-    Testimonials: any[];
-    Team: any[];
-    Contact: {
-        address: '',
-        phone: '',
-        email: '',
-        facebook: '',
-        twitter: '',
-        youtube: '',
-
+    Header: { paragraph: '', title: '', learnMoreBtn: '' };
+    Features: {
+        info: {};
+        list: [];
     };
+    About: { Why: any[]; Why2: any[]; sectionTitle:''; aboutText: ''; paragraph: '' };
+    Services: {
+        info: {};
+        list: [];
+    };
+    Gallery: {
+        info: {};
+        list: [];
+    };
+    Testimonials: {
+        info: {};
+        list: [];
+    };
+    Team: {
+        info: {};
+        list: [];
+    };
+    Contact: {};
     Footer: {
         copyright: '',
         website: '',
@@ -48,16 +55,29 @@ const App: React.FC = () => {
     const [post, fetchState, getAppConfig] = useGetAppConfig();
 
     let [landingPageData, setLandingPageData] = useState<props>({
-            Header: {paragraph: '', title: ''},
-            Features: [],
-            About: {Why: [], Why2: [], paragraph: ''},
-            Services: [],
-            Gallery: [],
-            Testimonials: [],
-            Team: [],
-            Contact: {
-
+            Header: {paragraph: '', title: '', learnMoreBtn: ''},
+            Features: {
+                info: {},
+                list: []
             },
+            About: {Why: [], Why2: [], sectionTitle: '', aboutText:'', paragraph: ''},
+            Services: {
+                info: {},
+                list: []
+            },
+            Gallery: {
+                info: {},
+                list: []
+            },
+            Testimonials: {
+                info: {},
+                list: []
+            },
+            Team: {
+                info: {},
+                list: []
+            },
+            Contact: {},
             Footer: {
                 copyright: '',
                 website: '',
@@ -66,7 +86,7 @@ const App: React.FC = () => {
         },
     );
     useEffect(() => {
-        getAppConfig(1).then()
+        getAppConfig(2).then()
     }, []);
 
     if (post) {
