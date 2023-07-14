@@ -1,23 +1,6 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
-
-interface ContactProps {
-  data: {
-    sectionTitle: string;
-    sectionTitleDesc: string;
-    contactItem: string;
-    addressTitle: string;
-    address: string;
-    phoneTitle: string;
-    phone: string;
-    emailTitle: string;
-    email: string;
-    facebook: string;
-    twitter: string;
-    youtube: string;
-    sendLabelBtn: string;
-  };
-}
+import { ContactProps } from "../model/component.models";
 
 interface State {
   name: string;

@@ -12,6 +12,7 @@ import SmoothScroll from "smooth-scroll";
 import "./App.css";
 import { useGetAppConfig } from "./services/api-hooks";
 import { Footer } from "./components/footer";
+import {AppModel, NavigationModel} from "./model/component.models";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
     speed: 1000,
@@ -19,42 +20,15 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
 });
 
 
-interface props {
-    Header: { paragraph: '', title: '', learnMoreBtn: '' };
-    Features: {
-        info: {};
-        list: [];
-    };
-    About: { Why: any[]; Why2: any[]; sectionTitle:''; aboutText: ''; paragraph: '' };
-    Services: {
-        info: {};
-        list: [];
-    };
-    Gallery: {
-        info: {};
-        list: [];
-    };
-    Testimonials: {
-        info: {};
-        list: [];
-    };
-    Team: {
-        info: {};
-        list: [];
-    };
-    Contact: {};
-    Footer: {
-        copyright: '',
-        website: '',
-        orgName: ''
-    };
-}
-
 const App: React.FC = () => {
 
     const [post, fetchState, getAppConfig] = useGetAppConfig();
 
-    let [landingPageData, setLandingPageData] = useState<props>({
+    let [landingPageData, setLandingPageData] = useState<AppModel>({
+            Navigation: {
+                navHeader: {},
+                menus: []
+            } as NavigationModel,
             Header: {paragraph: '', title: '', learnMoreBtn: ''},
             Features: {
                 info: {},
@@ -95,7 +69,7 @@ const App: React.FC = () => {
 
     return (
         <div>
-            <Navigation/>
+            <Navigation data={landingPageData.Navigation}/>
             <Header data={landingPageData.Header}/>
             <Features data={landingPageData.Features}/>
             <About data={landingPageData.About}/>

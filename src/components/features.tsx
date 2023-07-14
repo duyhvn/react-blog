@@ -1,21 +1,19 @@
 import React from "react";
 
-type Data = {
-    info: {
-        sectionTitle: string
-    },
-    list: {
-        title: string;
-        icon: string;
-        text: string;
-    }[]
-};
+interface FeatureProps {
+    data: {
+        info: {
+            sectionTitle: string
+        },
+        list: {
+            title: string;
+            icon: string;
+            text: string;
+        }[]
+    };
+}
 
-type FeatureProps = {
-    data: Data;
-};
-
-export const Features: React.FC<FeatureProps> = ({data}) => {
+export const Features: React.FC<FeatureProps> = ({ data } ) => {
     return (
         <div id="features" className="text-center">
             <div className="container">

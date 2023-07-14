@@ -1,14 +1,5 @@
-import React, { ReactNode } from "react";
-
-interface AboutProps {
-  data: {
-    sectionTitle: string;
-    aboutText: string;
-    paragraph: string;
-    Why: any[];
-    Why2: any[];
-  };
-}
+import React from "react";
+import { AboutProps } from "../model/component.models";
 
 export const About: React.FC<AboutProps> = ({ data } ) => {
   return (
